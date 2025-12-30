@@ -1,0 +1,50 @@
+---
+services:
+  db:
+    image: simhadrihanumanthu/python:dbimage
+    ports:
+      - "3306:3306"
+    networks:
+      - simhanetwork
+    deploy:
+      replicas: 1
+
+  auth_service:
+    image: simhadrihanumanthu/python:authimage
+    ports:
+      - "5001:5001"
+    networks:
+      - simhanetwork
+    deploy:
+      replicas: 1
+
+  book_service:
+    image: simhadrihanumanthu/python:bookimage
+    ports:
+      - "5002:5002"
+    networks:
+      - simhanetwork
+    deploy:
+      replicas: 1
+
+  borrow_service:
+    image: simhadrihanumanthu/python:borrowimage
+    ports:
+      - "5003:5003"
+    deploy:
+      replicas: 1
+    networks:
+      - simhanetwork
+
+  frontend_service:
+    image: simhadrihanumanthu/python:frontendimage
+    ports:
+      - "5000:5000"
+    networks:
+      - simhanetwork
+    deploy:
+      replicas: 1
+
+networks:
+  simhanetwork:
+    driver: overlay
